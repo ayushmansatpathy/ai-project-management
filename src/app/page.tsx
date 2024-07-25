@@ -1,7 +1,12 @@
+"use client";
+
 import { useState } from "react";
 import styles from "./page.module.css";
+import "/Users/ayushmansatpathy/ai-project-management/src/app/globals.css"
 
 import { closestCorners, DndContext } from "@dnd-kit/core";
+
+import { Column } from "./components/Column/Column";
 
 export default function Home() {
 
@@ -13,10 +18,10 @@ export default function Home() {
 
   return (
     <div>
-      <div className={styles.container}>
-        <h1>Hello World</h1>
+      <div className="bg-midnight">
+        <h1 className="text-3xl font-bold underline">Hello World</h1>
         <DndContext collisionDetection={closestCorners}>
-
+          <Column tasks={tasks} />
         </DndContext>
       </div>
     </div>
