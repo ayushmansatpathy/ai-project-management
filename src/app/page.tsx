@@ -11,15 +11,15 @@ import { Column } from "./components/Column/Column";
 export default function Home() {
 
   const [tasks, setTasks] = useState([
-    { id: 1, title: "eifhsohgsf" },
-    { id: 2, title: "efsef" },
-    { id: 3, title: "snrgnrgisr" }
+    { id: 1, title: "Add pages to text" },
+    { id: 2, title: "Go and switch off the AC" },
+    { id: 3, title: "Remember August 1st is an important day" }
   ]);
 
   return (
     <div>
-      <div className="bg-midnight">
-        <h1 className="text-3xl font-bold underline">Hello World</h1>
+      <div className="grid place-items-center">
+        <h1 className="text-3xl font-bold my-10">Hello World</h1>
         <DndContext collisionDetection={closestCorners}>
           <Column tasks={tasks} />
         </DndContext>

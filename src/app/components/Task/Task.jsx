@@ -1,1 +1,0 @@
-import "/Users/ayushmansatpathy/ai-project-management/src/app/globals.css"
