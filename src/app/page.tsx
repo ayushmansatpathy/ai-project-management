@@ -6,7 +6,7 @@ import "/Users/ayushmansatpathy/ai-project-management/src/app/globals.css"
 
 import { closestCorners, DndContext } from "@dnd-kit/core";
 
-import { Column } from "./components/Column/Column";
+import { CustomKanban } from "./components/Kanban/Kanban";
 
 export default function Home() {
 
@@ -18,12 +18,9 @@ export default function Home() {
 
   return (
     <div>
-      <div className="grid place-items-center">
-        <h1 className="text-3xl font-bold my-10">Hello World</h1>
-        <DndContext collisionDetection={closestCorners}>
-          <Column tasks={tasks} />
-        </DndContext>
-      </div>
+      <DndContext collisionDetection={closestCorners}>
+        <CustomKanban />
+      </DndContext>
     </div>
 
   );
