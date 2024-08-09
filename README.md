@@ -4,3 +4,7 @@ This is an AI Project Management tool, aiding students who are trying to work on
 
 Essentially Asana with a pinch of LLM stuff on it.
 
+If you would like to view the backend, you can visit this [link](https://github.com/ayushmansatpathy/ai-project-management-backend).
+
+Stay tuned to see the completed product!
+
