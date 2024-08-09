@@ -8,6 +8,8 @@ import { closestCorners, DndContext } from "@dnd-kit/core";
 
 import { CustomKanban } from "./components/Kanban/Kanban";
 
+import { Request } from "./components/Journeys/Journeys"
+
 export default function Home() {
 
   const [tasks, setTasks] = useState([
@@ -19,7 +21,8 @@ export default function Home() {
   return (
     <div>
       <DndContext collisionDetection={closestCorners}>
-        <CustomKanban />
+        {/* <CustomKanban /> */}
+        <Request />
       </DndContext>
     </div>
 
