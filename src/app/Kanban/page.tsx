@@ -1,15 +1,20 @@
+"use client"
+
 import React, {
     Dispatch,
     SetStateAction,
     useState,
     DragEvent,
     FormEvent,
+    useEffect,
 } from "react";
 import { FiPlus, FiTrash } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { FaFire } from "react-icons/fa";
+import { arr } from "../Journeys/page";
 
-export const CustomKanban = () => {
+const CustomKanban = () => {
+
     return (
         <div className="h-screen w-full bg-neutral-900 text-neutral-50">
             <Board />
@@ -18,7 +23,12 @@ export const CustomKanban = () => {
 };
 
 const Board = () => {
-    const [cards, setCards] = useState(DEFAULT_CARDS);
+
+    const [cards, setCards] = useState(arr);
+
+    useEffect(() => {
+        setCards(arr)
+    }, [cards]);
 
     return (
         <div className="flex h-full w-full gap-3 overflow-scroll p-12">
@@ -28,6 +38,7 @@ const Board = () => {
                 headingColor="text-neutral-500"
                 cards={cards}
                 setCards={setCards}
+                func={() => { console.log("yo") }}
             />
             <Column
                 title="TODO"
@@ -35,6 +46,7 @@ const Board = () => {
                 headingColor="text-yellow-200"
                 cards={cards}
                 setCards={setCards}
+                func={() => { console.log("yo") }}
             />
             <Column
                 title="In progress"
@@ -42,6 +54,7 @@ const Board = () => {
                 headingColor="text-blue-200"
                 cards={cards}
                 setCards={setCards}
+                func={() => { console.log("yo") }}
             />
             <Column
                 title="Complete"
@@ -49,6 +62,7 @@ const Board = () => {
                 headingColor="text-emerald-200"
                 cards={cards}
                 setCards={setCards}
+                func={() => { console.log("yo") }}
             />
             <BurnBarrel setCards={setCards} />
         </div>
@@ -60,15 +74,17 @@ type ColumnProps = {
     headingColor: string;
     cards: CardType[];
     column: ColumnType;
+    func: () => void
     setCards: Dispatch<SetStateAction<CardType[]>>;
 };
 
-const Column = ({
+export const Column = ({
     title,
     headingColor,
     cards,
     column,
     setCards,
+    func,
 }: ColumnProps) => {
     const [active, setActive] = useState(false);
 
@@ -191,7 +207,7 @@ const Column = ({
                     }`}
             >
                 {filteredCards.map((c) => {
-                    return <Card key={c.id} {...c} handleDragStart={handleDragStart} />;
+                    return <Card key={c.id} {...c} handleDragStart={handleDragStart} onClick={func} />;
                 })}
                 <DropIndicator beforeId={null} column={column} />
                 <AddCard column={column} setCards={setCards} />
@@ -202,9 +218,10 @@ const Column = ({
 
 type CardProps = CardType & {
     handleDragStart: Function;
+    onClick: () => void
 };
 
-const Card = ({ title, id, column, handleDragStart }: CardProps) => {
+const Card = ({ title, id, column, handleDragStart, onClick }: CardProps) => {
     return (
         <>
             <DropIndicator beforeId={id} column={column} />
@@ -213,6 +230,7 @@ const Card = ({ title, id, column, handleDragStart }: CardProps) => {
                 layoutId={id}
                 draggable="true"
                 onDragStart={(e) => handleDragStart(e, { title, id, column })}
+                onClick={onClick}
                 className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
             >
                 <p className="text-sm text-neutral-100">{title}</p>
@@ -342,7 +360,7 @@ const AddCard = ({ column, setCards }: AddCardProps) => {
 
 type ColumnType = "backlog" | "todo" | "doing" | "done";
 
-type CardType = {
+export type CardType = {
     title: string;
     id: string;
     column: ColumnType;
@@ -377,3 +395,5 @@ const DEFAULT_CARDS: CardType[] = [
         column: "done",
     },
 ];
+
+export default CustomKanban;

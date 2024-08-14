@@ -6,9 +6,10 @@ import "/Users/ayushmansatpathy/ai-project-management/src/app/globals.css"
 
 import { closestCorners, DndContext } from "@dnd-kit/core";
 
-import { CustomKanban } from "./components/Kanban/Kanban";
+import CustomKanban from "./Kanban/page";
 
-import { Request } from "./components/Journeys/Journeys"
+import Request from "./Journeys/page"
+import Navigation from "./Navigation/page";
 
 export default function Home() {
 
@@ -20,9 +21,11 @@ export default function Home() {
 
   return (
     <div>
+      {/* <Navigation /> */}
+      <Request />
       <DndContext collisionDetection={closestCorners}>
-        {/* <CustomKanban /> */}
-        <Request />
+        <CustomKanban />
+
       </DndContext>
     </div>
 
